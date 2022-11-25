@@ -1,21 +1,9 @@
-import { createDestination } from "./create_destination"
-import { findDestination } from "./find_destination"
+import { createDestination } from "./create_destination.js"
+import { findDestination } from "./find_destination.js"
 
 export interface Destination {
   url: string
-  timesVisited: number
-  createdOn: Date
-  lastVisitedOn?: Date
 }
-
-export interface Environment {
-  readonly KV: KVNamespace
-  readonly FALLBACK_URL: string
-  readonly KEY_LENGTH: number
-  readonly WRITE_KEY: string
-}
-
-export let ENV: Environment
 
 export let KV: KVNamespace
 export let FALLBACK_URL: string
@@ -30,12 +18,9 @@ export default {
 }
 
 export async function handleRequest(request: Request, environment: Bindings) {
-  //ENV = {...environment} as Environment
-
-  //KV = environment.KV
-  //FALLBACK_URL = environment.FALLBACK_URL
-  //KEY_LENGTH = parseInt(environment.KEY_LENGTH) || 10
-  console.log(environment)
+  KV = environment.KV
+  FALLBACK_URL = environment.FALLBACK_URL
+  KEY_LENGTH = parseInt(environment.KEY_LENGTH) || 10
 
   const { method, url } = request
   const { pathname } = new URL(url)

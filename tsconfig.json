@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "outDir": "dist",
     "lib": ["esnext"],
+    "module": "commonjs",
     "types": ["@cloudflare/workers-types", "@types/jest"],
     "moduleResolution": "node",
     "strict": true,

@@ -1,16 +1,14 @@
-import { KV, FALLBACK_URL } from "./worker"
+import { KV, FALLBACK_URL, Destination } from "./worker.js"
 
 export async function findDestination(key: string) {
-  let destination = JSON.parse(await KV.get(key))
+  const data: string | null = await KV.get(key)
 
-  if (destination === null) {
+  if (data === null) {
     return {
       url: FALLBACK_URL
     }
   } else {
-    destination.timesVisited++
-    destination.lastVistiedOn = new Date()
-    KV.put(key, destination)
+    const destination: Destination = JSON.parse(data)
     return destination
   }
 }

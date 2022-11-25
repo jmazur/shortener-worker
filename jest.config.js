@@ -4,14 +4,12 @@ export default {
   globals: {
     "ts-jest": {
       tsconfig: "test/tsconfig.json",
-      useESM: true,
+      useESM: true
     },
   },
-  // Configuration is automatically loaded from `.env`, `package.json` and
-  // `wrangler.toml` files by default, but you can pass any additional Miniflare
-  // API options here:
-  testEnvironmentOptions: {
-    bindings: { KEY: "value" },
-    kvNamespaces: ["TEST_NAMESPACE"],
-  },
+  extensionsToTreatAsEsm: ['.ts'],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+  }
 };
