@@ -1,4 +1,6 @@
 # shortener-worker
+![example workflow](https://github.com/jmazur/shortener-worker/actions/workflows/node.js.yml/badge.svg?label=build)
+
 A self-managed url shortener deployed to a Cloudflare Worker. Uses Cloudfalre KV for storage.
 
 ## Deploy
