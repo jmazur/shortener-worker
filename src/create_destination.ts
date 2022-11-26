@@ -1,30 +1,25 @@
 import { nanoid } from "nanoid"
-import { KV, KEY_LENGTH, Destination } from "./worker.js"
-
-interface DestinationRequest {
-  url: string,
-  expires_in?: number
-}
+import { env } from "./worker.js"
 
 export async function createDestination(request: DestinationRequest) {
-  const { url, expires_in } = request
-
-  const key: string = await generateKey()
+  const { url } = request
+  const length: number = parseInt(env.KEY_LENGTH) || 10
+  const key: string = await generateKey(length)
 
   const destination: Destination = {
     url: url
   }
 
-  await KV.put(key, JSON.stringify(destination))
+  await env.KV.put(key, JSON.stringify(destination))
   return { response: key, status: 200 }
 }
 
-async function generateKey(): Promise<string> {
-  const key: string = nanoid(KEY_LENGTH)
+async function generateKey(length: number): Promise<string> {
+  const key: string = `/${nanoid(length)}`
 
-  if (await KV.get(key) === null) {
+  if (await env.KV.get(key) === null) {
     return key
   } else {
-    return await generateKey()
+    return await generateKey(length + 1)
   }
 }

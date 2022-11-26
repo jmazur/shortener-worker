@@ -1,11 +1,11 @@
-import { KV, FALLBACK_URL, Destination } from "./worker.js"
+import { env } from "./worker.js"
 
 export async function findDestination(key: string) {
-  const data: string | null = await KV.get(key)
+  const data: string | null = await env.KV.get(key)
 
   if (data === null) {
     return {
-      url: FALLBACK_URL
+      url: env.FALLBACK_URL
     }
   } else {
     const destination: Destination = JSON.parse(data)

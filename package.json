@@ -1,15 +1,15 @@
 {
   "name": "shortener",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build.js",
     "start": "wrangler dev",
     "deploy": "wrangler publish",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "dependencies": {
+    "@curveball/http-errors": "^0.4.1",
     "nanoid": "^4.0.0"
   },
   "devDependencies": {

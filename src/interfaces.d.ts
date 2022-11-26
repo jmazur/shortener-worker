@@ -4,3 +4,12 @@ interface Bindings {
   KEY_LENGTH: string
   WRITE_KEY: string
 }
+
+interface Destination {
+  url: string
+}
+
+interface DestinationRequest {
+  url: string,
+  key: string
+}
