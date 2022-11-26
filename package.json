@@ -1,5 +1,5 @@
 {
-  "name": "shortener",
+  "name": "shortener-worker",
   "version": "0.0.4",
   "description": "A worker based URL shortener service",
   "keywords": ["cloudflare", "worker", "shortener", "url shortener"],

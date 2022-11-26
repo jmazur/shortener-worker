@@ -1,11 +1,12 @@
 name = "shortener"
 main = "src/worker.ts"
-compatibility_date = "2022-11-11"
+compatibility_date = "2022-11-25"
+workers_dev = false
 kv_namespaces = [
-  { binding = "KV", id = "cb1bc51d54c2469a8822704d6166c95f" }
+  { binding = "KV", id = "<YOUR KV ID>" }
 ]
 
 [vars]
 FALLBACK_URL = "https://google.ca"
-WRITE_KEY = "key"
 KEY_LENGTH = "8"
+WRITE_KEY = ""
