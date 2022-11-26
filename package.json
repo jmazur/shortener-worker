@@ -1,6 +1,15 @@
 {
   "name": "shortener",
   "version": "0.0.4",
+  "description": "A worker based URL shortener service",
+  "keywords": ["cloudflare", "worker", "shortener", "url shortener"],
+  "homepage": "https://github.com/jmazur/shortener-worker",
+  "bugs": "https://github.com/jmazur/shortener-worker/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmazur/shortener-worker"
+  },
   "private": true,
   "type": "module",
   "scripts": {
