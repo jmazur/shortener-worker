@@ -1,5 +1,7 @@
 # shortener-worker
 ![example workflow](https://github.com/jmazur/shortener-worker/actions/workflows/node.js.yml/badge.svg?label=build)
+[![Maintainability](https://api.codeclimate.com/v1/badges/376c353a95648ddeb416/maintainability)](https://codeclimate.com/github/jmazur/shortener-worker/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/376c353a95648ddeb416/test_coverage)](https://codeclimate.com/github/jmazur/shortener-worker/test_coverage)
 
 A self-managed url shortener deployed to a Cloudflare Worker. Uses Cloudfalre KV for storage.
 
