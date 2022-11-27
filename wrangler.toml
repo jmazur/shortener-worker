@@ -9,4 +9,4 @@ kv_namespaces = [
 [vars]
 FALLBACK_URL = "https://google.ca"
 KEY_LENGTH = "5"
-WRITE_KEY = "CHANGE ME"
+WRITE_KEY = "<GENERATE KEY>" # Generate a unique write key https://www.uuidgenerator.net/

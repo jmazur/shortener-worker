@@ -27,11 +27,12 @@ export async function handleRequest(request: Request) {
   const { pathname } = new URL(url)
 
   if (method === 'GET') {
-    const destination = await findDestination(pathname)
+    const destination: Destination = await findDestination(pathname)
     return Response.redirect(destination.url, 301)
   } else if (method === 'PUT') {
-    const { response, status } = await createDestination(await request.json())
-    return new Response(response, { status: status })
+    const destinationRequest: DestinationRequest = await request.json()
+    const destination: Destination = await createDestination(destinationRequest)
+    return new Response(JSON.stringify(destination), { status: 201 })
   } else {
     throw new NotImplemented
   }

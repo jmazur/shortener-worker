@@ -1,14 +1,23 @@
+import { Unauthorized, ServiceUnavailable } from '@curveball/http-errors';
+
 export async function createDestination(request: DestinationRequest) {
-  const { url } = request
+  const { url, writeKey } = request
+
+  if (globalThis.WRITE_KEY === "<GENERATE KEY>") {
+    throw new ServiceUnavailable
+  }
+
+  if (writeKey != globalThis.WRITE_KEY) {
+    throw new Unauthorized
+  }
+
   const length: number = globalThis.KEY_LENGTH
   const key: string = await generateKey(length)
 
-  const destination: Destination = {
-    url: url
-  }
+  const destination: Destination = { url: url, key: key }
 
   await globalThis.KV.put(key, JSON.stringify(destination))
-  return { response: key, status: 200 }
+  return destination
 }
 
 export async function generateKey(length: number): Promise<string> {

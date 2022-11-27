@@ -1,11 +1,10 @@
-import { expect, jest, test } from '@jest/globals';
+import { jest } from '@jest/globals';
+import { HttpError } from '@curveball/http-errors';
 import { createDestination, generateKey } from '../src/create_destination';
 
 jest.unstable_mockModule('nanoid', () => ({
   nanoid: (length: number) => { return 'x'.repeat(length) },
 }));
-
-const nanoid = await import('nanoid');
 
 beforeEach(() => {
   const env = getMiniflareBindings();
@@ -16,8 +15,55 @@ beforeEach(() => {
 });
 
 describe('createDestination', () => {
-  test('returns the default destination when no key matches', async () => {
+  test('throws an error when the write key is incorrect', async () => {
+    globalThis.WRITE_KEY = "aaa"
+    const request: DestinationRequest = { url: "https://test.com",
+                                          writeKey: "bbb" }
+    let thrownError;
 
+    try {
+      await createDestination(request)
+      fail('No Exception Thrown')
+    } catch(error) {
+      thrownError = error as HttpError;
+      expect(thrownError.httpStatus).toBe(401)
+    }
+  })
+
+  test('throws an error when the write key has not been changed', async () => {
+    const request: DestinationRequest = { url: "https://test.com",
+                                          writeKey: "bbb" }
+    let thrownError;
+
+    try {
+      await createDestination(request)
+      fail('No Exception Thrown')
+    } catch(error) {
+      thrownError = error as HttpError;
+      expect(thrownError.httpStatus).toBe(503)
+    }
+  })
+
+  test('creates a destination in the KV store', async () => {
+    globalThis.WRITE_KEY = "aaa"
+    const request: DestinationRequest = { url: "https://test.com",
+                                          writeKey: "aaa" }
+
+    const destination: Destination = await createDestination(request)
+    const result: string | null = await globalThis.KV.get(destination.key as string)
+    const resultJson: Destination = JSON.parse(result as string)
+
+    expect(resultJson.url).toBe("https://test.com")
+  })
+
+  test('returns a destination response', async () => {
+    globalThis.WRITE_KEY = "aaa"
+    const request: DestinationRequest = { url: "https://test.com",
+                                          writeKey: "aaa" }
+
+    const result: Destination = await createDestination(request)
+
+    expect(result.url).toBe("https://test.com")
   })
 })
 

@@ -6,10 +6,11 @@ interface Bindings {
 }
 
 interface Destination {
-  url: string
+  url: string,
+  key?: string
 }
 
 interface DestinationRequest {
   url: string,
-  key: string
+  writeKey: string
 }
