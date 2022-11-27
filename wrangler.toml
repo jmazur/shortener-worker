@@ -8,5 +8,5 @@ kv_namespaces = [
 
 [vars]
 FALLBACK_URL = "https://google.ca"
-KEY_LENGTH = "8"
-WRITE_KEY = "key"
+KEY_LENGTH = "5"
+WRITE_KEY = "CHANGE ME"

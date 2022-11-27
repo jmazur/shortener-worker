@@ -1,11 +1,14 @@
 export default {
   preset: "ts-jest",
   testEnvironment: "miniflare",
-  globals: {
-    "ts-jest": {
-      tsconfig: "test/tsconfig.json",
-      useESM: true
-    },
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: "test/tsconfig.json",
+        useESM: true
+      },
+    ],
   },
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {

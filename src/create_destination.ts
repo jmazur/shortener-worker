@@ -1,5 +1,3 @@
-import { nanoid } from "nanoid"
-
 export async function createDestination(request: DestinationRequest) {
   const { url } = request
   const length: number = globalThis.KEY_LENGTH
@@ -13,8 +11,9 @@ export async function createDestination(request: DestinationRequest) {
   return { response: key, status: 200 }
 }
 
-async function generateKey(length: number): Promise<string> {
-  const key: string = `/${nanoid(length)}`
+export async function generateKey(length: number): Promise<string> {
+  const { nanoid } = await import("nanoid");
+  const key: string = nanoid(length)
 
   if (await globalThis.KV.get(key) === null) {
     return key
