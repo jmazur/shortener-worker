@@ -1,6 +1,7 @@
 export default {
   preset: "ts-jest",
   testEnvironment: "miniflare",
+  collectCoverage: true,
   transform: {
     '^.+\\.tsx?$': [
       'ts-jest',

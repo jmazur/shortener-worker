@@ -13,11 +13,11 @@ export default {
   async fetch(request: Request, env: Bindings) {
     globalThis.KV = env.KV
     globalThis.FALLBACK_URL = env.FALLBACK_URL
-    globalThis.KEY_LENGTH = parseInt(env.KEY_LENGTH) || 10
+    globalThis.KEY_LENGTH = parseInt(env.KEY_LENGTH)
     globalThis.WRITE_KEY = env.WRITE_KEY
 
     return await handleRequest(request).catch(
-      (err) => new Response(err.title, { status: err.status })
+      (err) => new Response(err.title, { status: err.httpStatus })
     )
   }
 }

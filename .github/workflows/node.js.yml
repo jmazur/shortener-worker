@@ -29,3 +29,9 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - name: Publish code coverage
+      uses: paambaati/codeclimate-action@v3.2.0
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        coverageLocations: |
+          ${{github.workspace}}/coverage/lcov.info:lcov
